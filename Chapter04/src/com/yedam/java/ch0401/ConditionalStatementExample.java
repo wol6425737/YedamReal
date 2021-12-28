@@ -3,6 +3,7 @@ package com.yedam.java.ch0401;
 public class ConditionalStatementExample {
 	public static void main(String[] args) {
 		// 기본 IF문;;;
+		//dkfjdkfjdkfjsllfksdjaflsadjfkl,
 		int score = 93;
 
 		if (score >= 90) {
