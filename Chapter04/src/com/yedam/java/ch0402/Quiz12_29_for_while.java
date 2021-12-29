@@ -92,47 +92,46 @@ public class Quiz12_29_for_while {
 		
 		
 		//161p 문제 7
-//		boolean run = true;
-//		int balance = 0;
-//		Scanner scanner = new Scanner(System.in);
-//		int number;
-//		int number2;
-//		
-//		while(run) {
-//			System.out.println("---------------------------------");
-//			System.out.println("  1.예금 | 2.출금 | 3.잔고 | 4.종료");
-//			System.out.println("---------------------------------");
-//			System.out.println("선택> ");
-//			number = Integer.parseInt(scanner.nextLine());
-//			
-//			switch(number) {
-//			case 1:
-//				System.out.println("예금액>");
-//				number2 = Integer.parseInt(scanner.nextLine());
-//				balance += number2;
-//				number2 = 0;
-//				break;
-//			
-//			case 2:
-//				System.out.println("출금액>");
-//				number2 = Integer.parseInt(scanner.nextLine());
-//				balance -= number2;
-//				number2 = 0;
-//				break;
-//			
-//			case 3:
-//				System.out.println("잔고>");
-//				System.out.print(balance+"\n");
-//				break;
-//			
-//			case 4:
-//				run = false;
-//				break;
-//			}
-//			
-//			
-//		}
-//		System.out.println("프로그램 종료");
+		boolean run = true;
+		int balance = 0;
+		Scanner scanner = new Scanner(System.in);
+		int number;
+		int number2;
+		
+		while(run) {
+			System.out.println("---------------------------------");
+			System.out.println("  1.예금 | 2.출금 | 3.잔고 | 4.종료");
+			System.out.println("---------------------------------");
+			System.out.println("선택> ");
+			number = Integer.parseInt(scanner.nextLine());
+			number2 = 0;
+			
+			switch(number) {
+			case 1:
+				System.out.println("예금액>");
+				number2 = Integer.parseInt(scanner.nextLine());
+				balance += number2;
+				break;
+			
+			case 2:
+				System.out.println("출금액>");
+				number2 = Integer.parseInt(scanner.nextLine());
+				balance -= number2;
+				break;
+			
+			case 3:
+				System.out.println("잔고>");
+				System.out.print(balance+"\n");
+				break;
+			
+			case 4:
+				run = false;
+				break;
+			}
+			
+			
+		}
+		System.out.println("프로그램 종료");
 		
 		
 		
