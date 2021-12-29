@@ -125,7 +125,11 @@ public class Quiz12_29_for_while {
 			case 4:
 				run = false;
 				break;
+				
+			default :
+				System.out.println("잘못 입력 했습니다.");
 			}
+
 			
 			
 		}
