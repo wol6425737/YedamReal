@@ -18,7 +18,7 @@ public class Quiz12_29 {
 		int m = 10;
 		int n = 5;
 
-		System.out.println( ( m*2 != n*4 ) && ( n<=5 ) );
+		System.out.println( ( m*2 == n*3 )|| ( n<=4 ) );
 		System.out.println( ( m/2 >= 5) && ( n%2 == 1) );
 		
 		// 문제3) 각 연산식을 대입 연산자 하나로 구성된 연산식으로 수정하세요.
@@ -38,12 +38,8 @@ public class Quiz12_29 {
 	  			    만일 그렇지 않다면 'both a and b are zero or more'를 출력하도록 구현하세요. */ 
 		int a = 10;
 		int b = -8;
-		if(a<0||b<0) {
-			System.out.println("One of a or b is negative number");
-		}
-		else {
-			System.out.println("both a and b are zero or more");
-		}
+		String aab = a<0||b<0 ? "One of a or b is negative number" : "both a and b are zero or more";
+		System.out.println(aab);
 
 	}
 
