@@ -104,24 +104,22 @@ public class Quiz12_29_for_while {
 			System.out.println("---------------------------------");
 			System.out.println("선택> ");
 			number = Integer.parseInt(scanner.nextLine());
-			number2 = 0;
+		
 			
 			switch(number) {
 			case 1:
 				System.out.println("예금액>");
-				number2 = Integer.parseInt(scanner.nextLine());
-				balance += number2;
+				balance += Integer.parseInt(scanner.nextLine());
 				break;
 			
 			case 2:
 				System.out.println("출금액>");
-				number2 = Integer.parseInt(scanner.nextLine());
-				balance -= number2;
+				balance -= Integer.parseInt(scanner.nextLine());
 				break;
 			
 			case 3:
 				System.out.println("잔고>");
-				System.out.print(balance+"\n");
+				System.out.println(balance);
 				break;
 			
 			case 4:
