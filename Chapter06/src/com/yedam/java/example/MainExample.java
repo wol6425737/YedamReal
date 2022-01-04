@@ -6,15 +6,17 @@ public class MainExample {
 	public static void main(String[] args) {
 		//문제1) Calculator 클래스 -> 사칙연산에 대한 메서드 만들기
 		Calculator myCalc = new Calculator();
-		double addResult = myCalc.plus(5, 3);
-		double minusResult = myCalc.minus(5, 3);
-		double multiplyResult = myCalc.multiply(5, 3);
-		double divideResult = myCalc.divide(5, 3);
+		double x = 10;
+		double y = 4;
+		double addResult = myCalc.plus(x, y);
+		double minusResult = myCalc.minus(x, y);
+		double multiplyResult = myCalc.multiply(x, y);
+		double divideResult = myCalc.divide(x, y);
 		
-		System.out.println("addResult(5,3) = " + addResult);
-		System.out.println("minusResult(5,3) = " + minusResult);
-		System.out.println("multiplyResult(5,3) = " + multiplyResult);
-		System.out.println("divideResult(5,3) = " + divideResult);
+		System.out.println("addResult = " + addResult);
+		System.out.println("minusResult = " + minusResult);
+		System.out.println("multiplyResult = " + multiplyResult);
+		System.out.println("divideResult = " + divideResult);
 		
 		System.out.println();
 		System.out.println();
