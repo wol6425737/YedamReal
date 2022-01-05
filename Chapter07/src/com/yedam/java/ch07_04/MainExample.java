@@ -15,6 +15,24 @@ public class MainExample {
 		
 		B b1 = d;
 		C c1 = e;
+		
+		//B b3 = e; 
+		//C c2 = d;
+		
+		Child child =  new Child();
+		child.method1();
+		child.method2();
+		child.method3();
+		
+		System.out.println();
+		Parent parent = child;
+		parent.method1();
+		parent.method2();
+		//parent.method3();
+		
 	}
+	
+	
+	
 
 }
