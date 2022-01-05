@@ -1,4 +1,4 @@
-package com.java.yedam.ch07_01;
+package com.yedam.java.ch07_01;
 
 public class Airplane {
 	public void land() {

@@ -1,4 +1,4 @@
-package com.java.yedam.ch07_03;
+package com.yedam.java.ch07_03;
 
 public class ChildExample {
 	public static void main(String[] args) {
