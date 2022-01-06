@@ -5,6 +5,7 @@ public class BeanCafe{
 	private int money;
 	private String menu = "라떼";
 	private int customerCount;
+	private boolean run = true;
 	
 	public BeanCafe(String name){
 		this.name = name;
@@ -28,6 +29,8 @@ public class BeanCafe{
 	public String getMenu() {
 		return menu;
 	}
+	
+
 	
 
 }
