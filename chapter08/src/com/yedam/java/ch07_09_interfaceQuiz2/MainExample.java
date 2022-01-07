@@ -22,7 +22,7 @@ public class MainExample {
 					55
 
 	*/
-		MyAdder adder = new MyAdder();
+		AdderInterface adder = new MyAdder();
 		System.out.println(adder.add(5,10));
 		System.out.println(adder.add(10));
 	}

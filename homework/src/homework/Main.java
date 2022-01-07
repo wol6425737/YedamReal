@@ -1,5 +1,9 @@
 package homework;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Scanner;
+
 public class Main {
 	public static void main(String[] args) {
 		//문제) 다음은 도서관리프로그램 중 일부입니다.
@@ -34,6 +38,47 @@ public class Main {
 		 - 책 반납
 		 	1) 혼자공부하는자바
 		 */
+		boolean run = true;
+		Scanner scanner = new Scanner(System.in);
+		int num;
+		List<Book> list = new ArrayList<Book>();
+		while(run) {
+			System.out.println("1.책정보 입력 | 2.전체조회 | 3.단건조회 | 4.책 대여 | 5.책 반납 | 6.종료");
+			System.out.println("번호를 입력하세요 : ");
+			num = scanner.nextInt();
+			
+			switch(num) {
+			case 1:
+				System.out.println("책 이름을 입력하세요.");
+				String bookName = scanner.next();
+				System.out.println("책 이름을 입력하세요.");
+				String author = scanner.next();
+				Book book = new Book(bookName,author);
+				list.add(book);
+				
+				break;
+			case 2:
+				for(int i = 0; i<list.size();i++) {
+					String name = list.get(i).getBookName();
+					String authorName = list.get(i).getAuthor();
+					System.out.println(i + "번 책이름 : " + name + "\t저자 : " + authorName);
+				}
+				break;
+			case 3:
+				System.out.println("조회할 책 이름을 입력하세요");
+				String searchBook = scanner.next();
+				
+				
+				break;
+			case 4:
+				break;
+			case 5:
+				break;
+			case 6:
+				break;
+				
+			}
+		}
 		
 	}
 
