@@ -39,20 +39,22 @@ public class Main {
 		 	1) 혼자공부하는자바
 		 */
 		boolean run = true;
+		boolean have;
 		Scanner scanner = new Scanner(System.in);
 		int num;
+		int lent;
 		List<Book> list = new ArrayList<Book>();
 		while(run) {
 			System.out.println("1.책정보 입력 | 2.전체조회 | 3.단건조회 | 4.책 대여 | 5.책 반납 | 6.종료");
 			System.out.println("번호를 입력하세요 : ");
-			num = scanner.nextInt();
+			num = Integer.parseInt(scanner.nextLine());
 			
 			switch(num) {
 			case 1:
 				System.out.println("책 이름을 입력하세요.");
-				String bookName = scanner.next();
-				System.out.println("책 이름을 입력하세요.");
-				String author = scanner.next();
+				String bookName = scanner.nextLine();
+				System.out.println("책 저자 이름을 입력하세요.");
+				String author = scanner.nextLine();
 				Book book = new Book(bookName,author);
 				list.add(book);
 				
@@ -61,23 +63,94 @@ public class Main {
 				for(int i = 0; i<list.size();i++) {
 					String name = list.get(i).getBookName();
 					String authorName = list.get(i).getAuthor();
-					System.out.println(i + "번 책이름 : " + name + "\t저자 : " + authorName);
+					System.out.println(list.get(i).getBookNumber() + "번 책이름 : " + name + "\t\t저자 : " + authorName
+							+ "\t\t대여 여부(" +list.get(i).getIsLent()+")");
 				}
 				break;
 			case 3:
 				System.out.println("조회할 책 이름을 입력하세요");
-				String searchBook = scanner.next();
-				
-				
+				String searchBook = scanner.nextLine();
+				have = false;
+				for(int i = 0; i<list.size();i++) {
+					String name = list.get(i).getBookName();
+					String authorName = list.get(i).getAuthor();
+					if(searchBook.equals(name)) {
+						have = true;
+						System.out.println(list.get(i).getBookNumber() + "번 책이름 : " + name + "\t\t저자 : " + authorName
+								+ "\t\t대여 여부(" +list.get(i).getIsLent()+")");
+					}
+					else {
+						continue;
+					}
+				}
+				if(have == false) {
+					System.out.println("도서관에 없는 책이거나 이름을 잘 못 입력하셨습니다.");
+				}
 				break;
 			case 4:
+				System.out.println("대여 할 책 이름을 입력하세요 : ");
+				String borrowBook = scanner.nextLine();
+				have = false;
+				for(int i = 0; i<list.size();i++) {
+					if(borrowBook.equals(list.get(i).getBookName())) {
+						have = true;
+						System.out.println(list.get(i).getIsLent());
+						if(list.get(i).getIsLent().equals("대여가능")) {
+							System.out.println("대여하시겠습니까? 1.대여 함 2.대여 안함");
+							lent = Integer.parseInt(scanner.nextLine());
+							if(lent == 1) {
+								list.get(i).borrowBook();
+								System.out.println("대여 완료됐습니다.");
+							}
+							else {
+								System.out.println("대여를 하지 않았습니다.");
+							}
+						}
+						else {
+							System.out.println("대여가 불가능합니다.");
+						}
+					}
+					else{
+						continue;
+					}	
+				}
+				if(have == false) {
+					System.out.println("도서관에 없는 책이거나 이름을 잘 못 입력하셨습니다.");
+				}
 				break;
 			case 5:
+				System.out.println("반납 할 책 이름을 입력하세요 : ");
+				have = false;
+				String returnBook = scanner.nextLine();
+				for(int i = 0; i<list.size();i++) {
+					if(returnBook.equals(list.get(i).getBookName())) {
+						have = true;
+						if(list.get(i).isLent()) {
+							System.out.println("반납 완료했습니다.");
+							list.get(i).returnBook();
+						}
+						else {
+							System.out.println("대여 중인 책이 아닙니다.");
+						}
+
+					}
+					else{
+						continue;
+					}	
+				}
+				if(have == false) {
+					System.out.println("도서관에 없는 책이거나 이름을 잘 못 입력하셨습니다.");
+				}
+				
 				break;
 			case 6:
+				System.out.println("도서 관리 프로그램을 종료합니다.");
+				run = false;
 				break;
-				
+			default:
+				System.out.println("번호를 잘 못 입력하셨습니다.");
 			}
+			
 		}
 		
 	}

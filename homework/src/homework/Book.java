@@ -5,6 +5,7 @@ public class Book {
 	private String bookName;
 	private String author;
 	private int bookNumber;
+	private boolean isLent = false;
 	
 	Book(String bookName, String author){
 		this.bookName = bookName;
@@ -48,10 +49,29 @@ public class Book {
 	public void setAuthor(String author) {
 		this.author = author;
 	}
+	
 	public boolean isLent() {
 		
-		return true;
+		return isLent;
 	}
+	
+	public String getIsLent() {
+		if(isLent == false) {
+			return "대여가능";
+		}
+		else {
+			return "대여중";
+		}
+	}
+	
+	public void borrowBook() {
+		isLent = true;
+	}
+	
+	public void returnBook() {
+		isLent = false;
+	}
+
 	
 	
 	
