@@ -27,10 +27,10 @@ public class MainExample {
 				정수 2개를 입력하세요 >> 3 5
 				계산된 값은 -2
 	*/
-		Adder adder = new Adder();
-		Substractor subtractor = new Substractor();
-		adder.run();
-		subtractor.run();
+		Calculator calc1 = new Adder();
+		calc1.run();
+		Calculator calc2 = new Substractor();
+		calc2.run();
 		
 		
 	}

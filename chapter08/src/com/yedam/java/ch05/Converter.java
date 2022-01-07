@@ -9,6 +9,9 @@ public abstract class Converter {
 		abstract protected String getDestString(); // 추상 메소드
 		
 		protected double ratio; // 비율
+		public Converter(double ratio){
+			this.ratio = ratio;
+		}
 		
 		public void run() {
 			Scanner scanner = new Scanner(System.in);

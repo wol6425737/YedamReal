@@ -2,7 +2,8 @@ package com.yedam.java.ch05;
 
 public class Won2Dollar extends Converter {
 	
-	public Won2Dollar(int ratio){
+	public Won2Dollar(double ratio){
+		super(ratio);
 		this.ratio = ratio;
 	}
 
