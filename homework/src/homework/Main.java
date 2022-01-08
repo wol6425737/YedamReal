@@ -92,7 +92,7 @@ public class Main {
 				for(int i = 0; i<list.size();i++) {
 					String name = list.get(i).getBookName();
 					String authorName = list.get(i).getAuthor();
-					System.out.printf("%4d번 책이름 : %-15s %4s : %-8s %4s\n",list.get(i).getBookNumber(),name,"저자",authorName,list.get(i).getIsLent());
+					System.out.printf("%4d번 책이름 :%-15s저자 : %-8s%10s\n",list.get(i).getBookNumber(),name ,authorName,list.get(i).getIsLent());
 				}
 				System.out.println();
 				break;
@@ -102,10 +102,10 @@ public class Main {
 				have = false;
 				for(int i = 0; i<list.size();i++) {
 					String name = list.get(i).getBookName();
-					String authorName = list.get(i).getAuthor();
+					String authorName = "저자 : " + list.get(i).getAuthor();
 					if(searchBook.equals(name)) {
 						have = true;
-						System.out.printf("%4d번 책이름 : %-15s %4s : %-8s %4s\n",list.get(i).getBookNumber(),name,"저자",authorName,list.get(i).getIsLent());
+						System.out.printf("%4d번 책이름 :%-15s%-8s%10s\n",list.get(i).getBookNumber(),name,authorName,list.get(i).getIsLent());
 						
 					}
 					else {
