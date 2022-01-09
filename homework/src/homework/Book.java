@@ -1,5 +1,7 @@
 package homework;
 
+import java.util.List;
+
 public class Book {
 	private static int SERIALNUMBER = 1000;
 	private String bookName;
@@ -71,9 +73,6 @@ public class Book {
 	public void returnBook() {
 		isLent = false;
 	}
-
-	
-	
 	
 
 }

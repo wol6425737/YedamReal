@@ -3,6 +3,7 @@ package homework;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
+import homework.Book;
 
 public class Main {
 	public static void main(String[] args) {
@@ -89,10 +90,12 @@ public class Main {
 
 
 			case 2:
-				for(int i = 0; i<list.size();i++) {
+				for (int i = 0; i < list.size(); i++) {
+					int bookNumber = list.get(i).getBookNumber();
 					String name = list.get(i).getBookName();
-					String authorName = list.get(i).getAuthor();
-					System.out.printf("%4d번 책이름 :%-15s저자 : %-8s%10s\n",list.get(i).getBookNumber(),name ,authorName,list.get(i).getIsLent());
+					String authorName = "저자 : " + list.get(i).getAuthor();
+					String isLent = list.get(i).getIsLent();
+					System.out.printf("%4d번 책이름 : %-20s\t %-10s \t %s\n", bookNumber, name, authorName, isLent);
 				}
 				System.out.println();
 				break;
@@ -101,12 +104,13 @@ public class Main {
 				String searchBook = scanner.nextLine();
 				have = false;
 				for(int i = 0; i<list.size();i++) {
+					int bookNumber = list.get(i).getBookNumber();
 					String name = list.get(i).getBookName();
 					String authorName = "저자 : " + list.get(i).getAuthor();
+					String isLent = list.get(i).getIsLent();
 					if(searchBook.equals(name)) {
 						have = true;
-						System.out.printf("%4d번 책이름 :%-15s%-8s%10s\n",list.get(i).getBookNumber(),name,authorName,list.get(i).getIsLent());
-						
+						System.out.printf("%4d번 책이름 : %-20s\t %-10s \t %s\n", bookNumber, name, authorName, isLent);						
 					}
 					else {
 						continue;
