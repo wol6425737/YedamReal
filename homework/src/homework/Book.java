@@ -7,27 +7,18 @@ public class Book {
 	private String bookName;
 	private String author;
 	private int bookNumber;
-	private boolean isLent = false;
+	private boolean isLent;
 	
 	Book(String bookName, String author){
 		this.bookName = bookName;
 		this.author = author;
 		SERIALNUMBER++;
 		bookNumber += SERIALNUMBER;
+		this.isLent = false;
 		
 		
 	}
 	
-
-	public static int getSERIALNUMBER() {
-		return SERIALNUMBER;
-	}
-
-
-	public static void setSERIALNUMBER(int sERIALNUMBER) {
-		SERIALNUMBER = sERIALNUMBER;
-	}
-
 
 	public int getBookNumber() {
 		return bookNumber;

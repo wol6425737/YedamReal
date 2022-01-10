@@ -3,7 +3,6 @@ package homework;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
-import homework.Book;
 
 public class Main {
 	public static void main(String[] args) {
@@ -95,7 +94,7 @@ public class Main {
 					String name = list.get(i).getBookName();
 					String authorName = "저자 : " + list.get(i).getAuthor();
 					String isLent = list.get(i).getIsLent();
-					System.out.printf("%4d번 책이름 : %-20s\t %-10s \t %s\n", bookNumber, name, authorName, isLent);
+					System.out.printf("%4d번 책이름 : %-20s\t %-20s \t %s\n", bookNumber, name, authorName, isLent);
 				}
 				System.out.println();
 				break;
@@ -110,7 +109,7 @@ public class Main {
 					String isLent = list.get(i).getIsLent();
 					if(searchBook.equals(name)) {
 						have = true;
-						System.out.printf("%4d번 책이름 : %-20s\t %-10s \t %s\n", bookNumber, name, authorName, isLent);						
+						System.out.printf("%4d번 책이름 : %-20s\t %-20s \t %s\n", bookNumber, name, authorName, isLent);						
 					}
 					else {
 						continue;
@@ -136,7 +135,7 @@ public class Main {
 								list.get(i).borrowBook();
 								System.out.println("대여 완료됐습니다.");
 							}
-							else {
+							else if(lent==2) {
 								System.out.println("대여를 하지 않았습니다.");
 							}
 						}
@@ -186,6 +185,7 @@ public class Main {
 			}
 			
 		}
+		scanner.close();
 		
 	}
 
