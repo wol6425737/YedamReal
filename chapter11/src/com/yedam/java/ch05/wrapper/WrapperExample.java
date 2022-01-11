@@ -29,6 +29,26 @@ public class WrapperExample {
 		
 		System.out.println(value);
 		
+		//포장객체비교
+		
+		System.out.println("[-128 ~ 127를 초과한 경우]");
+		Integer obj6 = 300;
+		Integer obj7 = 300;
+		System.out.println("==결과 : " + (obj6 == obj7));//false
+		System.out.println("언박싱 후 결과 : " + (obj6.intValue() == obj7.intValue()));
+		System.out.println("equals() 결과 : " + obj6.equals(obj7));
+		
+		System.out.println("[-128 ~ 127 범위 값인 경우]");
+		Integer obj8 = 100;
+		Integer obj9 = 100;
+		System.out.println("==결과 : " + (obj8 == obj9)); //true
+		System.out.println("언박싱 후 결과 : " + (obj8.intValue() == obj9.intValue()));
+		System.out.println("equals() 결과 : " + obj8.equals(obj9));
+		
+		
+		
+		
+		
 		
 	}
 
