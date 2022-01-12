@@ -1,4 +1,4 @@
-package com.yedam.java.app;
+package com.yedam.java.app.emp13;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -8,9 +8,8 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class EmployeesDAO {
-	//Sqlite 연결정보
-	
+public class Emp13DAO {
+	//DB 연결 정보
 	String jdbc_driver ="org.sqlite.JDBC";
 	String jdbc_url = "jdbc:sqlite:/c:/dev/workspace/YedamDataBase.db";
 	
@@ -19,30 +18,31 @@ public class EmployeesDAO {
 	PreparedStatement pstmt = null;
 	ResultSet rs = null;
 	
-	
 	//싱글톤
-	private static EmployeesDAO instance =  new EmployeesDAO();
-	private EmployeesDAO() {
-		
-	}
-	public static EmployeesDAO getInstance() {
+	private static Emp13DAO instance = new Emp13DAO();
+	
+	private Emp13DAO() {}
+	
+	public static Emp13DAO getInstance() {
 		return instance;
 	}
 	
 	//JDBC Driver 로딩
 	//DB 서버 접속
 	// -> Connect() 메서드
+	
 	public void connect() {
 		try {
 			Class.forName(jdbc_driver);
 			conn = DriverManager.getConnection(jdbc_url);
-		}
-		catch(ClassNotFoundException e) {
+		} catch (ClassNotFoundException e) {
 			System.out.println("JDBC Driver 로딩 실패");
-		}
-		catch(SQLException e) {
+
+		} catch (SQLException e) {
 			System.out.println("DB 접속 실패");
+
 		}
+		
 		
 	}
 	
@@ -52,145 +52,134 @@ public class EmployeesDAO {
 	// -> 각 CRUD 메서드로 반복적으로 사용
 	
 	//전체조회
-	public List<Employee> selectAll(){
-		List<Employee> list = new ArrayList<>();
-		
+	public List<Emp13> SelectAll(){
+		List<Emp13> list = new ArrayList<Emp13>();
 		try {
 			connect();
-			String select = "SELECT * FROM employees ORDER BY  employee_id";
+			String select = "SELECT * FROM emp13 ORDER BY employee_id";
 			pstmt = conn.prepareStatement(select);
 			rs = pstmt.executeQuery();
 			while(rs.next()) {
-				Employee emp = new Employee();
+				Emp13 emp = new Emp13();
 				emp.setEmployeeId(rs.getInt("employee_id"));
 				emp.setFirstName(rs.getString("first_name"));
-				emp.setLastName(rs.getString("last_name"));
-				emp.setEmail(rs.getString("email"));
-				emp.setPhoneNumber(rs.getString("phone_number"));
-				emp.setHireDate(rs.getString("hire_date"));
 				emp.setJobId(rs.getString("job_id"));
 				emp.setSalary(rs.getInt("salary"));
-				emp.setCommissionPct(rs.getString("commission_pct"));
-				emp.setManagerId(rs.getString("manager_id"));
-				emp.setDepartmentId(rs.getString("department_id"));
-				
+				emp.setCommissionPct(rs.getDouble("commission_pct"));
+				emp.setDepartmentName(rs.getString("department_name"));
+				emp.setLocationId(rs.getString("location_id"));
 				list.add(emp);
+				
 			}
-		}catch(SQLException e) {
-			e.printStackTrace();
-			
-		} finally {
+		} catch(SQLException e) 
+		{
+			e.printStackTrace();}
+		finally 
+		{
 			disconnect();
 		}
-		
 		return list;
 	}
 	
 	//단건조회
-	public Employee selectOne(int employeeId) {
-		Employee emp = null;
-		try{
+	public Emp13 selectOne(int employeeId) {
+		Emp13 emp = null;
+		
+		try {
 			connect();
-			String select = "SELECT * FROM employees WHERE employee_id = ?";
+			String select = "SELECT * FROM emp13 WHERE employee_id = ?";
 			pstmt = conn.prepareStatement(select);
-			pstmt.setInt(1,employeeId);
+			pstmt.setInt(1, employeeId);
 			rs = pstmt.executeQuery();
 			if(rs.next()) {
-				emp = new Employee();
-				emp.setEmployeeId(rs.getInt("employee_id"));
-				emp.setFirstName(rs.getString("first_name"));
-				emp.setLastName(rs.getString("last_name"));
-				emp.setEmail(rs.getString("email"));
-				emp.setPhoneNumber(rs.getString("phone_number"));
-				emp.setHireDate(rs.getString("hire_date"));
-				emp.setJobId(rs.getString("job_id"));
-				emp.setSalary(rs.getInt("salary"));
-				emp.setCommissionPct(rs.getString("commission_pct"));
-				emp.setManagerId(rs.getString("manager_id"));
-				emp.setDepartmentId(rs.getString("department_id"));
-							
+				emp = new Emp13();
+				emp.setEmployeeId(emp.getEmployeeId());
+				emp.setFirstName(emp.getFirstName());
+				emp.setJobId(emp.getJobId());
+				emp.setSalary(emp.getSalary());
+				emp.setCommissionPct(emp.getCommissionPct());
+				emp.setDepartmentName(emp.getDepartmentName());
+				emp.setLocationId(emp.getLocationId());
 				
 			}
-			
-		} catch(SQLException e) {
+		}
+		catch(SQLException e) {
 			e.printStackTrace();
-		} finally {
+		}
+		finally {
 			disconnect();
 		}
+		
 		return emp;
 	}
 	
 	//등록
-	public void insert(Employee emp) {
+	public void insert(Emp13 emp) {
 		try {
 			connect();
-			String insert = "INSERT INTO employees VALUES (?,?,?,?,?,?,?,?,?,?,?)";
+			String insert = "INSERT INTO emp13 VALUES(?,?,?,?,?,?,?)";
 			pstmt = conn.prepareStatement(insert);
 			pstmt.setInt(1, emp.getEmployeeId());
 			pstmt.setString(2, emp.getFirstName());
-			pstmt.setString(3, emp.getLastName());
-			pstmt.setString(4, emp.getEmail());
-			pstmt.setString(5, emp.getPhoneNumber());
-			pstmt.setString(6, emp.getHireDate());
-			pstmt.setString(7, emp.getJobId());
-			pstmt.setInt(8, emp.getSalary());
-			pstmt.setString(9, emp.getCommissionPct());
-			pstmt.setString(10, emp.getManagerId());
-			pstmt.setString(11, emp.getDepartmentId());
+			pstmt.setString(3, emp.getJobId());
+			pstmt.setInt(4, emp.getSalary());
+			pstmt.setDouble(5, emp.getCommissionPct());
+			pstmt.setString(6,emp.getDepartmentName());
+			pstmt.setString(7,emp.getLocationId());
 			
 			int result = pstmt.executeUpdate();
 			System.out.println(result + "건이 등록되었습니다.");
 			
-		} catch(SQLException e) {
+		}catch(SQLException e) {
 			e.printStackTrace();
-		
-		} finally {
+		}finally {
 			disconnect();
-			
 		}
 		
 	}
 	
-	//수정 (연봉만 수정하는 update method)
-	public void update(Employee emp) {
+	//수정(departname을 수정하는 method)
+	public void update(Emp13 emp) {
 		try {
 			connect();
-			String update = "UPDATE employees SET salary = ? WHERE employee_id = ?";
+			String update = "UPDATE emp13 SET department_name = ? WHERE employee_id = ?";
 			pstmt = conn.prepareStatement(update);
-			pstmt.setInt(1, emp.getSalary());
+			pstmt.setString(1, emp.getDepartmentName());
 			pstmt.setInt(2, emp.getEmployeeId());
 			
 			int result = pstmt.executeUpdate();
 			System.out.println(result + "건이 수정되었습니다.");
 			
-			
-		} catch(SQLException e) {
+		}
+		catch(SQLException e) {
 			e.printStackTrace();
-		} finally {
+		}
+		finally {
 			disconnect();
 		}
-		
 	}
-	
 	
 	//삭제
 	public void delete(int employeeId) {
 		try {
 			connect();
-			String delete = "DELETE FROM employees WHERE employee_id = ?";
+			String delete = "DELETE FROM emp13 WHERE employee_id = ?";
 			pstmt = conn.prepareStatement(delete);
 			pstmt.setInt(1, employeeId);
-			
 			int result = pstmt.executeUpdate();
 			System.out.println(result + "건이 삭제되었습니다.");
 			
-		} catch(SQLException e) {
+		}catch(SQLException e) {
 			e.printStackTrace();
-			
-		} finally {
+		}
+		finally {
 			disconnect();
 		}
 	}
+	
+	
+	
+	
 	
 	//자원해제 -> disconnect() 메서드
 	public void disconnect() {
@@ -203,7 +192,6 @@ public class EmployeesDAO {
 			System.out.println("정상적으로 자원이 해제되지 않았습니다.");
 		}
 	}
-	
 	
 
 }

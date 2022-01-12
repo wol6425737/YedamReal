@@ -9,6 +9,8 @@ public class EmployeeApp {
 		Scanner scanner = new Scanner(System.in);
 		EmployeesDAO dao = EmployeesDAO.getInstance();
 		
+
+		
 		Employee emp = null;
 		int employeeId = 0;
 		
