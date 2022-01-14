@@ -71,7 +71,7 @@ public class DepartmentFrame {
 		}
 		
 		public void updateDepartment() {
-			//부서정보 입력
+			//부서명 입력
 			Department dept = inputDeptName();
 			//부서정보 등록
 			deptDAO.update(dept);
