@@ -12,8 +12,10 @@ public interface BookDAO {
 	//책등록
 	public void insertBook(Book book);
 	
+	//대여하기
 	public void updateBookRental(Book book);
 	
+	//반납하기
 	public void updateBookReturn(Book book);
 	
 
