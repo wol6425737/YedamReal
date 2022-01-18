@@ -13,13 +13,18 @@ import myproject1.src.com.java.yedam.gameresult.GameResultDAOImpl;
 import myproject1.src.com.java.yedam.powerball.PowerballAccount;
 import myproject1.src.com.java.yedam.powerball.PowerballDAO;
 import myproject1.src.com.java.yedam.powerball.PowerballDAOImpl;
+import myproject1.src.com.java.yedam.transfer.TransferRecord;
+import myproject1.src.com.java.yedam.transfer.TransferRecordDAO;
+import myproject1.src.com.java.yedam.transfer.TransferRecordDAOImpl;
 
 public class PowerballFrame {
 	private Scanner scanner = new Scanner(System.in);
 	private PowerballDAO pbd = PowerballDAOImpl.getInstance();
 	private AccountDAO ad = AccountDAOImpl.getInstance();
 	private GameResultDAO gd = GameResultDAOImpl.getInstance();
+	private TransferRecordDAO trd = TransferRecordDAOImpl.getInstance();
 	public AccountFrame af = new AccountFrame();
+
 	public static String ID = null;
 	public static String NAME = null;
 
@@ -90,6 +95,8 @@ public class PowerballFrame {
 					} else if (menuNo == 4) {
 						adminMenu4();
 					} else if (menuNo == 5) {
+						adminMenu5();
+					} else if (menuNo == 6) {
 						break outer;
 					}
 
@@ -158,7 +165,7 @@ public class PowerballFrame {
 
 		System.out.print("비밀번호를 입력하세요>");
 		pba.setPBAccountPassword(scanner.nextLine());
-		pba.setPBAPoint(0);
+		pba.setPBAPoint(0.0);
 
 		return pba;
 	}
@@ -224,10 +231,10 @@ public class PowerballFrame {
 	public void adminMenuPrint() {
 		System.out.println();
 		System.out.println(
-				"===========================================================================================================================================");
-		System.out.println("1.모든 게임 결과 확인| 2.게임 별 결과 출력 | 3.회원 별 게임 결과 출력 | 4.회원 리스트 보기 |5.프로그램종료");
+				"==================================================================================================================");
+		System.out.println("1.모든 게임 결과 확인| 2.게임 별 결과 출력 | 3.회원 별 게임 결과 출력 | 4.회원 리스트 보기 | 5.거래기록 조회 | 6.프로그램종료");
 		System.out.println(
-				"===========================================================================================================================================");
+				"==================================================================================================================");
 		System.out.println("메뉴선택>");
 
 	}
@@ -263,7 +270,7 @@ public class PowerballFrame {
 		int pb = powerball();
 		System.out.println("============파워볼 맞추기==============");
 		System.out.println("0부터 9까지 숫자 중 하나의 숫자를 맞추는 게임입니다.");
-		System.out.printf("베팅 한도 >%13.3f\n", maxBettingAmount);
+		System.out.printf("베팅 한도 >%-13.3f\n", maxBettingAmount);
 		while (true) {
 			System.out.print("베팅할 금액>");
 			bettingAmount = Double.parseDouble(scanner.nextLine());
@@ -271,7 +278,7 @@ public class PowerballFrame {
 				System.out.println("보유하신 포인트보다 베팅 시도 금액이 더 큽니다. 다시 입력하세요.");
 			} else {
 				System.out.println("베팅 완료 되었습니다.");
-				System.out.printf("잔여 포인트> %13.3f\n", (maxBettingAmount - bettingAmount));
+				System.out.printf("잔여 포인트> %-13.3f\n", (maxBettingAmount - bettingAmount));
 				break;
 			}
 
@@ -338,7 +345,7 @@ public class PowerballFrame {
 
 		System.out.println("============파워볼 홀짝 맞추기==============");
 		System.out.println("파워볼(0~9)이 홀수일지 짝수일지 맞추는 게임입니다.");
-		System.out.printf("베팅 한도 >%13.3f\n", maxBettingAmount);
+		System.out.printf("베팅 한도 >%-13.3f\n", maxBettingAmount);
 		while (true) {
 			System.out.print("베팅할 금액>");
 			bettingAmount = Double.parseDouble(scanner.nextLine());
@@ -346,7 +353,7 @@ public class PowerballFrame {
 				System.out.println("보유하신 포인트보다 베팅 시도 금액이 더 큽니다. 다시 입력하세요.");
 			} else {
 				System.out.println("베팅 완료 되었습니다.");
-				System.out.printf("잔여 포인트> %13.3f\n", (maxBettingAmount - bettingAmount));
+				System.out.printf("잔여 포인트> %-13.3f\n", (maxBettingAmount - bettingAmount));
 				break;
 			}
 		}
@@ -416,7 +423,7 @@ public class PowerballFrame {
 
 		System.out.println("============파워볼 언오버 맞추기==============");
 		System.out.println("파워볼(0~9)이 언더(0~4) 오버(5~9)일지 맞추는 게임입니다.");
-		System.out.printf("베팅 한도 >%13.3f\n", maxBettingAmount);
+		System.out.printf("베팅 한도 >%-13.3f\n", maxBettingAmount);
 		while (true) {
 			System.out.print("베팅할 금액>");
 			bettingAmount = Double.parseDouble(scanner.nextLine());
@@ -424,7 +431,7 @@ public class PowerballFrame {
 				System.out.println("보유하신 포인트보다 베팅 시도 금액이 더 큽니다. 다시 입력하세요.");
 			} else {
 				System.out.println("베팅 완료 되었습니다.");
-				System.out.printf("잔여 포인트> %13.3f\n", (maxBettingAmount - bettingAmount));
+				System.out.printf("잔여 포인트> %-13.3f\n", (maxBettingAmount - bettingAmount));
 				break;
 			}
 		}
@@ -443,6 +450,7 @@ public class PowerballFrame {
 			} else if (chooseNo == 2) {
 				System.out.println("오버에 베팅하셨습니다.");
 				myUnov = "오버";
+				break;
 
 			} else if (chooseNo == 3) {
 				pba.setPBAPoint(+bettingAmount);
@@ -499,7 +507,7 @@ public class PowerballFrame {
 
 		System.out.println("============일반볼 합 홀짝 맞추기==============");
 		System.out.println("일반볼(1~28) 5개를 무작위 추첨하고 5개 일반볼의 합이 홀수일지 짝수일지 맞추는 게임입니다.");
-		System.out.printf("베팅 한도 > %13.3f\n", maxBettingAmount);
+		System.out.printf("베팅 한도 > %-13.3f\n", maxBettingAmount);
 		while (true) {
 			System.out.print("베팅할 금액>");
 			bettingAmount = Double.parseDouble(scanner.nextLine());
@@ -507,7 +515,7 @@ public class PowerballFrame {
 				System.out.println("보유하신 포인트보다 베팅 시도 금액이 더 큽니다. 다시 입력하세요.");
 			} else {
 				System.out.println("베팅 완료 되었습니다.");
-				System.out.printf("잔여 포인트> %13.3f\n", (maxBettingAmount - bettingAmount));
+				System.out.printf("잔여 포인트> %-13.3f\n", (maxBettingAmount - bettingAmount));
 				break;
 			}
 		}
@@ -590,7 +598,7 @@ public class PowerballFrame {
 
 		System.out.println("============일반볼 합 언오버 맞추기==============");
 		System.out.println("일반볼(1~28) 5개를 무작위 추첨하고 5개 일반볼의 합이 언더(13~72)일지 오버(73~130)일지 맞추는 게임입니다.");
-		System.out.printf("베팅 한도 >%13.3f\n", maxBettingAmount);
+		System.out.printf("베팅 한도 >%-13.3f\n", maxBettingAmount);
 		while (true) {
 			System.out.print("베팅할 금액>");
 			bettingAmount = Double.parseDouble(scanner.nextLine());
@@ -598,7 +606,7 @@ public class PowerballFrame {
 				System.out.println("보유하신 포인트보다 베팅 시도 금액이 더 큽니다. 다시 입력하세요.");
 			} else {
 				System.out.println("베팅 완료 되었습니다.");
-				System.out.printf("잔여 포인트> %13.3f\n", (maxBettingAmount - bettingAmount));
+				System.out.printf("잔여 포인트> %-13.3f\n", (maxBettingAmount - bettingAmount));
 				break;
 			}
 		}
@@ -683,6 +691,11 @@ public class PowerballFrame {
 				pba.setPBAPoint((double) money);
 				pbd.updateAccountPoint(pba);
 				System.out.println("포인트 충전이 정상 처리되었습니다.");
+				TransferRecord tr = new TransferRecord();
+				tr.setAccountId(ID);
+				tr.setDeposit(money);
+				tr.setWithdraw(0);
+				trd.insertTransferRecord(tr);
 
 			} else {
 				System.out.println("포인트 충전이 정상 처리되지 않았습니다. 입금신청계좌, 관리자계좌, 입금신청액을 다시 확인하세요");
@@ -699,7 +712,7 @@ public class PowerballFrame {
 		int i;
 
 		System.out.println("============ 출금하기 ==============");
-		System.out.printf("출금 한도(회원님이 가지고 계신 포인트) > 13.3f\n", maxBettingAmount);
+		System.out.printf("출금 한도(회원님이 가지고 계신 포인트) > %-13.3f\n", maxBettingAmount);
 		// 출금
 		while (true) {
 			System.out.print("출금할 금액>");
@@ -724,7 +737,13 @@ public class PowerballFrame {
 						af.withdrawPoint(accountAdmin, withdrawAmount);
 
 						System.out.println("출금 완료했습니다.");
-						System.out.printf("잔여 포인트> %13.3f\n ",(maxBettingAmount - withdrawAmount));
+						System.out.printf("잔여 포인트> %-13.3f\n ", (maxBettingAmount - withdrawAmount));
+
+						TransferRecord tr = new TransferRecord();
+						tr.setAccountId(ID);
+						tr.setDeposit(0);
+						tr.setWithdraw(withdrawAmount);
+						trd.insertTransferRecord(tr);
 						break;
 					}
 					if (user == null) {
@@ -747,7 +766,7 @@ public class PowerballFrame {
 	public void checkPoint() {
 
 		System.out.println("본인 포인트 확인");
-		System.out.printf(ID + "님이 현재 가지고 계신 포인트는 %13.3f입니다.\n", pbd.selectAccountPoint(ID));
+		System.out.printf(ID + "님이 현재 가지고 계신 포인트는 %-13.3f\n", pbd.selectAccountPoint(ID));
 	}
 
 	// 관리자 메뉴
@@ -823,6 +842,53 @@ public class PowerballFrame {
 			System.out.println(pba);
 		}
 
+	}
+
+	public void adminMenu5() {
+		int chooseNo;
+		while (true) {
+			System.out.println("===================== 거래기록 확인하기 ===================================================");
+			System.out.println("1.전체 거래기록 조회 || 2.회원 ID별 거래기록 조회 || 3. 돌아가기");
+			chooseNo = menuSelect1();
+			if (chooseNo == 1) {
+				List<TransferRecord> list = new ArrayList<TransferRecord>();
+				list = trd.selectAllTransferRecord();
+				for (TransferRecord tr : list) {
+					System.out.println(tr);
+				}
+			} else if (chooseNo == 2) {
+				String accountId;
+				PowerballAccount pba = null;
+				List<TransferRecord> list = new ArrayList<TransferRecord>();
+				while (true) {
+					System.out.print("조회할 ID를 입력하세요>");
+					accountId = scanner.nextLine();
+					pba = pbd.selectAccountInfo(accountId);
+					if (pba != null) {
+
+						list = trd.selectTransferRecordsById(accountId);
+						for (TransferRecord tr : list) {
+							System.out.println(tr);
+
+						}
+						break;
+					} else {
+						System.out.println("등록된 ID가 아닙니다. 회원별 결과 출력을 그만하시려면 9를 계속하시려면 다른 숫자를 입력하세요");
+						int i = menuSelect();
+						if (i == 9) {
+							break;
+						}
+					}
+
+				}
+
+			} else if (chooseNo == 3) {
+				return;
+			} else {
+				System.out.println("없는 메뉴입니다.");
+			}
+			break;
+		}
 	}
 
 }

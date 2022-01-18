@@ -10,7 +10,7 @@ public class DAO {
 	//Sqlite(DB) 연결정보
 	
 	String jdbc_driver ="org.sqlite.JDBC";
-	String jdbc_url = "jdbc:sqlite:/C:/Users/admin/Desktop/JAVA/PowerballDB.db";
+	String jdbc_url = "jdbc:sqlite:/C:/Users/admin/Desktop/Powerball.db";
 	
 	//각 메서드에서 공통적으로 사용하는 필드
 	protected Connection conn = null;

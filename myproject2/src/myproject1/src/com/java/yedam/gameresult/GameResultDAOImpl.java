@@ -7,15 +7,17 @@ import java.util.List;
 import myproject1.src.com.java.yedam.common.DAO;
 
 public class GameResultDAOImpl extends DAO implements GameResultDAO {
-	//싱글톤
+	// 싱글톤
 	private static GameResultDAO instance = new GameResultDAOImpl();
-	private GameResultDAOImpl() {}
+
+	private GameResultDAOImpl() {
+	}
+
 	public static GameResultDAO getInstance() {
 		return instance;
 	}
-	
 
-	//게임결과 전체조회
+	// 게임결과 전체조회
 	@Override
 	public List<GameResult> selectAllGameResult() {
 		List<GameResult> list = new ArrayList<GameResult>();
@@ -24,8 +26,8 @@ public class GameResultDAOImpl extends DAO implements GameResultDAO {
 			String select = "SELECT * FROM gameresult ORDER BY totalgame_no DESC";
 			pstmt = conn.prepareStatement(select);
 			rs = pstmt.executeQuery();
-			
-			while(rs.next()) {
+
+			while (rs.next()) {
 				GameResult gr = new GameResult();
 				gr.setAccountId(rs.getString("account_id"));
 				gr.setGameNo(rs.getInt("game_no"));
@@ -34,21 +36,20 @@ public class GameResultDAOImpl extends DAO implements GameResultDAO {
 				gr.setIsWin(rs.getInt("is_win"));
 				gr.setWinPrize(rs.getLong("win_prize"));
 				list.add(gr);
-				
+
 			}
-		}catch(SQLException e) {
+		} catch (SQLException e) {
 			e.printStackTrace();
-		}
-		finally {
+		} finally {
 			disconnect();
 		}
-		
+
 		return list;
 	}
-	
-	//게임별 게임결과 출력
+
+	// 게임별 게임결과 출력
 	@Override
-	public List<GameResult> selectGameResultsbyGames(int gameNo){
+	public List<GameResult> selectGameResultsbyGames(int gameNo) {
 		List<GameResult> list = new ArrayList<GameResult>();
 		try {
 			connect();
@@ -56,8 +57,8 @@ public class GameResultDAOImpl extends DAO implements GameResultDAO {
 			pstmt = conn.prepareStatement(select);
 			pstmt.setInt(1, gameNo);
 			rs = pstmt.executeQuery();
-			
-			while(rs.next()) {
+
+			while (rs.next()) {
 				GameResult gr = new GameResult();
 				gr.setAccountId(rs.getString("account_id"));
 				gr.setGameNo(rs.getInt("game_no"));
@@ -66,21 +67,20 @@ public class GameResultDAOImpl extends DAO implements GameResultDAO {
 				gr.setIsWin(rs.getInt("is_win"));
 				gr.setWinPrize(rs.getLong("win_prize"));
 				list.add(gr);
-				
+
 			}
-		}catch(SQLException e) {
+		} catch (SQLException e) {
 			e.printStackTrace();
-		}
-		finally {
+		} finally {
 			disconnect();
 		}
-		
+
 		return list;
 	}
-	
+
 	@Override
-	//회원별 게임 결과 출력
-	public List<GameResult> selectGameResultsbyId(String accountId){
+	// 회원별 게임 결과 출력
+	public List<GameResult> selectGameResultsbyId(String accountId) {
 		List<GameResult> list = new ArrayList<GameResult>();
 		try {
 			connect();
@@ -88,8 +88,8 @@ public class GameResultDAOImpl extends DAO implements GameResultDAO {
 			pstmt = conn.prepareStatement(select);
 			pstmt.setString(1, accountId);
 			rs = pstmt.executeQuery();
-			
-			while(rs.next()) {
+
+			while (rs.next()) {
 				GameResult gr = new GameResult();
 				gr.setAccountId(rs.getString("account_id"));
 				gr.setGameNo(rs.getInt("game_no"));
@@ -98,19 +98,18 @@ public class GameResultDAOImpl extends DAO implements GameResultDAO {
 				gr.setIsWin(rs.getInt("is_win"));
 				gr.setWinPrize(rs.getLong("win_prize"));
 				list.add(gr);
-				
+
 			}
-		}catch(SQLException e) {
+		} catch (SQLException e) {
 			e.printStackTrace();
-		}
-		finally {
+		} finally {
 			disconnect();
 		}
-		
+
 		return list;
 	}
 
-	//단건조회 (아이디검색)
+	// 단건조회 (아이디검색)
 	@Override
 	public GameResult selectOneResult(String accountId) {
 		GameResult gr = null;
@@ -119,9 +118,9 @@ public class GameResultDAOImpl extends DAO implements GameResultDAO {
 			String select = "SELECT * FROM gameresult WHERE account_id = ?";
 			pstmt = conn.prepareStatement(select);
 			pstmt.setString(1, accountId);
-			
+
 			rs = pstmt.executeQuery();
-			if(rs.next()) {
+			if (rs.next()) {
 				gr = new GameResult();
 				gr.setAccountId(rs.getString("account_id"));
 				gr.setGameNo(rs.getInt("game_no"));
@@ -129,18 +128,17 @@ public class GameResultDAOImpl extends DAO implements GameResultDAO {
 				gr.setBettingAmount(rs.getLong("betting_amount"));
 				gr.setIsWin(rs.getInt("is_win"));
 				gr.setWinPrize(rs.getLong("win_prize"));
-				
+
 			}
-		}catch(SQLException e) {
+		} catch (SQLException e) {
 			e.printStackTrace();
-		}
-		finally {
+		} finally {
 			disconnect();
 		}
 		return gr;
 	}
 
-	//게임결과 등록
+	// 게임결과 등록
 	@Override
 	public void insertGameResult(GameResult gr) {
 		try {
@@ -152,19 +150,17 @@ public class GameResultDAOImpl extends DAO implements GameResultDAO {
 			pstmt.setDouble(3, gr.getBettingAmount());
 			pstmt.setInt(4, gr.getIsWin());
 			pstmt.setDouble(5, gr.getWinPrize());
-			
+
 			int result = pstmt.executeUpdate();
-			if(result>0) {
+			if (result > 0) {
 				System.out.println("게임결과 업데이트 완료");
 			}
-			
-		}catch(SQLException e) {
+
+		} catch (SQLException e) {
 			e.printStackTrace();
-		}
-		finally {
+		} finally {
 			disconnect();
 		}
-		
 
 	}
 

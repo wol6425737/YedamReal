@@ -53,9 +53,9 @@ public class AccountFrame {
 	}
 	public void menuPrint() {
 		System.out.println();
-		System.out.println("=================================================");
-		System.out.println(("1.계좌개설 | 2.잔액조회 | 3.입금 | 4.출금 | 5.계좌이체"));
-		System.out.println("=================================================");
+		System.out.println("===========================================================");
+		System.out.println(("1.계좌개설 | 2.잔액조회 | 3.입금 | 4.출금 | 5.계좌이체 | 9.종료"));
+		System.out.println("===========================================================");
 	}
 	
 	public int menuSelect() {
@@ -196,7 +196,7 @@ public class AccountFrame {
 					//상대방 계좌에는 해당 금액을 입금처리
 					selectedAccount.setAccountBalance(amount);
 					dao.updateAccount(selectedAccount);	
-					if(money == amount && account.getAccountNo() == userAccount.getAccountNo()) {
+					if(money == amount && selectedAccount.getAccountNo() == adminAccount.getAccountNo()) {
 						return 1;
 					}
 					else {
